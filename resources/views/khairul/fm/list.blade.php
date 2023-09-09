@@ -1,0 +1,53 @@
+@extends('fm::app')
+
+@section('content')
+@if(isset($task))
+<h3>Edit Task ads :</h3>
+<form action="{{ route('task.update', $task->id) }}" method="POST">
+    @csrf
+    @method('PATCH')
+    @else
+    <h3>Add New Task AD :</h3>
+    <form action="{{ route('task.store') }}" method="POST">
+        @csrf
+        @endif
+        <div class="form-inline">
+            <div class="form-group">
+                <input type="text" name="name" value="{{ isset($task) ? $task->name : '' }}" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary form-control">{{ $submit }}</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+    <h4>Tasks To Do:</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($tasks as $task)
+            <tr>
+                <td>{{ $task->name }}</td>
+                <td>
+                    <form action="{{ route('task.destroy', $task->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <div class='btn-group'>
+                            <a href="{{ route('task.edit', [$task->id]) }}" class='btn btn-default btn-xs'><i
+                                    class="glyphicon glyphicon-edit"></i></a>
+                            <button type="submit" class='btn btn-danger btn-xs'
+                                onclick="return confirm('Are you sure?')"><i
+                                    class="glyphicon glyphicon-trash"></i></button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @endsection

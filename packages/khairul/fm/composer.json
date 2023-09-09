@@ -1,0 +1,25 @@
+{
+    "name": "khairul/fm",
+    "description": "this is my packge",
+    "autoload": {
+        "psr-4": {
+            "Khairul\\Fm\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Khairul\\Fm\\FmServiceProvider",
+                "Khairul\\Fm\\TodolistServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "mdkhairul773islam",
+            "email": "mdkhiarul773@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
